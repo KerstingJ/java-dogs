@@ -11,6 +11,9 @@ import java.util.Map;
 // adapted from https://tools.ietf.org.html/rfc7807
 public class ErrorDetail
 {
+    /*
+        This is the model describing the shape of our error response
+     */
     private String title;
     private int status;
     private String detail;
