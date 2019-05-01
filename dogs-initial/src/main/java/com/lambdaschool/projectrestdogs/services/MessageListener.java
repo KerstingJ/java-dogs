@@ -12,14 +12,10 @@ public class MessageListener
 {
     private static final Logger logger = LoggerFactory.getLogger(MessageListener.class);
 
-    @RabbitListener(queues = ProjectrestdogsApplication.QUEUE_NAME_HIGH)
+    // Queue to Listen to
+    // Can have multiple Queues (similar to endpoints)
+    @RabbitListener(queues = ProjectrestdogsApplication.QUEUE_NAME)
     public void receiveMessage(MessageDetail msg)
-    {
-        logger.info("Received message {}", msg.toString());
-    }
-
-    @RabbitListener(queues = ProjectrestdogsApplication.QUEUE_NAME_LOW)
-    public void receiveLowMessage(MessageDetail msg)
     {
         logger.info("Received message {}", msg.toString());
     }

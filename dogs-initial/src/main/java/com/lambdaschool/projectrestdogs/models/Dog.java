@@ -1,5 +1,8 @@
 package com.lambdaschool.projectrestdogs.models;
 
+import com.lambdaschool.projectrestdogs.services.MessageSender;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Dog
@@ -9,6 +12,9 @@ public class Dog
     private String breed;
     private int weight;
     private boolean apartmentSuitable;
+
+    @Autowired
+    MessageSender msgSender;
 
     public Dog(String breed, int weight, boolean apartmentSuitable)
     {

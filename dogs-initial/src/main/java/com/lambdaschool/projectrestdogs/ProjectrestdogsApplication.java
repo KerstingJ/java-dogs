@@ -18,8 +18,7 @@ public class ProjectrestdogsApplication
 {
 
     public static final String EXCHANGE_NAME = "LambdaServer";
-    public static final String QUEUE_NAME_LOW = "LowPriorityQueue";
-    public static final String QUEUE_NAME_HIGH = "HighPriorityQueue";
+    public static final String QUEUE_NAME = "LambdaQueue";
 
     public static DogList ourDogList;
     public static void main(String[] args)
@@ -31,36 +30,29 @@ public class ProjectrestdogsApplication
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
     }
 
+
+    // Name and init out message Server
     @Bean
     public TopicExchange appExchange()
     {
         return new TopicExchange(EXCHANGE_NAME);
     }
 
+    // Name and init our queue
     @Bean
-    public Queue appQueueLow()
+    public Queue appQueue()
     {
-        return new Queue(QUEUE_NAME_LOW);
+        return new Queue(QUEUE_NAME);
     }
 
+    // Bind Queue to Server
     @Bean
     public Binding declareBindingLow()
     {
-        return BindingBuilder.bind(appQueueLow()).to(appExchange()).with(QUEUE_NAME_LOW);
+        return BindingBuilder.bind(appQueue()).to(appExchange()).with(QUEUE_NAME);
     }
 
-    @Bean
-    public Queue appQueueHigh()
-    {
-        return new Queue(QUEUE_NAME_HIGH);
-    }
-
-    @Bean
-    public Binding declareBindingHigh()
-    {
-        return BindingBuilder.bind(appQueueHigh()).to(appExchange()).with(QUEUE_NAME_HIGH);
-    }
-
+    // tell message server to convert POJOs to JSON
     @Bean
     public Jackson2JsonMessageConverter producerJackson2MessageConverter()
     {

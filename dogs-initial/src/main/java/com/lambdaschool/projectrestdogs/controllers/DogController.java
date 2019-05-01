@@ -34,7 +34,7 @@ public class DogController
         logger.info("Getting list of dogs from endpoint /dogs");
         logger.debug("list of dogs from /dogs contains " + dogs.size() + " entries");
 
-        msgSender.sendMessage("MY MESSAGE SENDING SERVICE WORKS!!!!!" + dogs.get(0));
+        msgSender.sendMessage("Accesed All Dogs");
 
         return new ResponseEntity<>(dogs, HttpStatus.OK);
     }
@@ -53,6 +53,7 @@ public class DogController
         }
 
         logger.debug("found dog " + rtnDog);
+        msgSender.sendMessage("Searched for dog with id " + id + " found: " + rtnDog);
         return new ResponseEntity<>(rtnDog, HttpStatus.OK);
     }
 
@@ -71,7 +72,8 @@ public class DogController
             throw new ResourceNotFoundException("Could not find dogs with breed: " + breed);
         }
 
-        logger.debug("Returning list of dogs with size: " + rtnDogs.size());
+        logger.debug("Returning list of dogs with breed: " + breed + " with size: " + rtnDogs.size());
+        msgSender.sendMessage("Searched for dogs with breed:  " + breed + " found: " + rtnDogs.size());
         return new ResponseEntity<>(rtnDogs, HttpStatus.OK);
     }
 }

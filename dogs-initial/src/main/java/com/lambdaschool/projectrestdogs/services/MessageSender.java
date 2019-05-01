@@ -19,6 +19,6 @@ public class MessageSender
     public void sendMessage(String s)
     {
         MessageDetail message = new MessageDetail(s);
-        rt.convertAndSend(ProjectrestdogsApplication.QUEUE_NAME_HIGH, message);
+        rt.convertAndSend(ProjectrestdogsApplication.QUEUE_NAME, message);
     }
 }
